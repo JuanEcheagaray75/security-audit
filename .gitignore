@@ -29,3 +29,6 @@
 
 # IDE
 *.vscode
+
+# Building docs
+build.sh
