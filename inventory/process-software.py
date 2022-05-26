@@ -23,4 +23,5 @@ def process_software_unix(file_path: str, user: str, os: str):
     df.to_csv(f'inventory/data/processed/{os}-software-{user}.csv', index=False)
     
 
-process_software_unix('inventory/data/raw/ubuntu-installed-software.txt', 'mona')
+def process_software_windows(file_path: str, user: str, os: str):
+    pass
