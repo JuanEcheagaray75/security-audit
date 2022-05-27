@@ -30,5 +30,8 @@
 # IDE
 *.vscode
 
+# Data
+*.csv
+
 # Building docs
 build.sh
