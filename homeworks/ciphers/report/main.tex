@@ -8,6 +8,7 @@
 \usepackage{wrapfig}
 \usepackage[letterpaper, margin=1.5in]{geometry}
 \usepackage[hidelinks]{hyperref}
+\usepackage{pdfpages}
 \decimalpoint
 
 
@@ -57,6 +58,25 @@
         Este método tomó más tiempo de implementar y romper que el anterior, pero se tornó bastante sencillo de romper una vez que se conocían los remplazos adecuados. Este caso de estudio fue más sencillo de resolver dada la longitud del texto original de alrededor de $48,000$ caracteres. Con la implementación utilizada no existe una manera metódica de determinar el tiempo de ruptura del encriptado.
 
     \section{Sobre el cifrado Vigenère}
+        De los desarrollados en esta entrega, el cifrado de Vigenère es el más fuerte de todos, por mucho tiempo fue considerado irrompible, pero con las tecnologías actuales e inteligentes análisis es posible llegar a romperlo. La fortaleza sobre los anteriores es que entra en una categoría de métodos de cifrado conocidos como \emph{polialfabéticos}, para este caso se utiliza un cifrado de César para cada uno de los caracteres en el \emph{plaintext} que logra obscurecer por completo toda la información estadística del mensaje.
 
+        El algoritmo de encriptado recibe 2 secuencias de caracteres, una consistente del mensaje en claro y otra de la llave usada para cifrar, $m$ es la longitud de la llave. El caracter iésimo del texto cifrado se calcula con la siguiente expresión:
+
+        \begin{equation}
+            C_i = (p_i + k_{i\text{ mod } m}) \text{ mod } 26
+        \end{equation}
+
+        Para desencriptar el mensaje se tiene una expresión simple también:
+        \begin{equation}
+            p_i = (C_i - k_{i\text{ mod } m}) \text{ mod } 26
+        \end{equation}
+
+        El espacio de búsqueda para la llave se torna más grande, si tomamos $n$ como la longitud del alfabeto del lenguaje, y $m$ la longitud del mensaje, el espacio de búsqueda es entonces $n^m$. No existe una manera clara de intentar resolver este problema por fuerza bruta, ¿Con qué llave empezar? ¿Cuál será su longitud? Son algunas de las preguntas a las que nos enfrentaríamos si enfrentáramos el problema ciegamente.
+    
+    \clearpage
+    \appendix
+
+    \section{Código implementado y resultados}
+        \includepdf[pages=-]{classical-ciphers-converted.pdf}
 
 \end{document}
