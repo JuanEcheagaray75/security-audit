@@ -1,27 +1,44 @@
 import pandas as pd
 
 
-def process_software_unix(file_path: str, user: str, os: str):
-
-    with open(file_path, 'r') as f:
-        lines = f.readlines()
-
-    headers = lines[3].split()
-    headers = headers[1:]
-
-    software = lines[5:]
-    software = [line.split() for line in software]
-    # Collect the first 4 elements of each line
-    software_temp = [line[1:4] for line in software]
-    software_temp2 = [line[4:]  for line in software]
-    # Join the elements of each list into a single string
-    software_temp3 = [' '.join(line) for line in software_temp2]
-
-    df = pd.DataFrame(software_temp, columns=headers[0:3])
-    df['Description'] = software_temp3
-
-    df.to_csv(f'inventory/data/processed/{os}-software-{user}.csv', index=False)
+def process_inventory(path: str, filenames: str, extra_cases: str):
     
+    # Must add a check for valid paths and filenames
+    
+    dfs = []
 
-def process_software_windows(file_path: str, user: str, os: str):
-    pass
+    for filename in filenames:
+        temp_df = pd.read_csv(f'{path}/{filename}')
+        # Create a column filled with an id based on the filename
+        temp_df['id'] = filename.split('/')[-1].split('.')[0]
+        dfs.append(temp_df)
+
+    df = pd.concat(dfs, ignore_index=True)
+    df.dropna(subset=['DisplayName'], inplace=True)
+    df['InstallDate'] = pd.to_datetime(df['InstallDate'], format='%Y%m%d')
+
+    # Reset index
+    df = df.reset_index(drop=True)
+    # Strip whitespace from column names
+    df.columns = df.columns.str.strip()
+
+    # Needs to check if its a dictionary with the right column names
+    extra_software = pd.read_csv(f'{path}/{extra_cases}')
+    df = df.append(extra_software, ignore_index=True)
+
+    return df
+
+
+def main():
+
+    path = 'data/raw'
+    filenames = ['central.csv', 'pink.csv']
+    # Software used
+    extra_software = 'extra.csv'
+
+    df = process_inventory(path, filenames, extra_software)
+
+    df.to_csv('data/processed/software-sme.csv', index=False)
+
+
+main()
