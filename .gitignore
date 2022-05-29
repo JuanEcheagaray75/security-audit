@@ -27,11 +27,16 @@
 *.bcf
 *.xml
 
+# Notebooks
+*.html
+*.ipynb
+
 # IDE
 *.vscode
 
 # Data
 *.csv
+*.txt
 
 # Building docs
 build.sh
