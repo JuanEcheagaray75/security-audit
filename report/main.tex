@@ -1,0 +1,129 @@
+\documentclass[10pt]{article}
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[]{amsthm}
+\usepackage{amsmath}
+\usepackage[]{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[letterpaper, top=0.78in, bottom=0.78in, left=0.98in, right=0.98in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{csvsimple}
+\usepackage{pdflscape}
+\decimalpoint
+
+% Comandos personalizados
+\renewcommand{\baselinestretch}{1.5}
+% 20 mm superior e inferior <=> 0.78in
+% 25 mm derecha e izquierda <=> 0.98in
+
+\begin{document}
+    \begin{titlepage}
+        \begin{center}
+            % School logo
+            \begin{figure}
+                \centering
+                \includegraphics[scale=0.13]{../img/logo_itesm.png}\\ % Logo de la institución
+            \end{figure}
+            \vspace{5cm}
+            % School data
+            \LARGE{Instituto Tecnológico y de Estudios Superiores de Monterrey}\\
+            \vspace{1cm}
+            \large Escuela de Ingeniería y Ciencias \\
+            \vspace{0.2cm}
+            \large Ingeniería en Ciencias de Datos y Matemáticas \\
+            \vspace{0.2cm}
+            \large Análisis de Criptografía y Seguridad\\
+            \vspace{1cm}
+            \textbf{Auditoría de Seguridad y Plan de Mitigación: Caso PINK Accesorios y Regalos}\\ % Nombre de la tarea
+            \vspace{0.7cm}
+            % Tabla de integrantes del equipo
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{ ||c|c|| }
+                    \hline
+                    Nombre & Matrícula \\
+                    \hline
+                    Julio Avelino Amador Fernández & A01276513 \\
+                    \hline
+                    Juan Pablo Echeagaray González & A00830646 \\
+                    \hline
+                    Verónica Victoria García De la Fuente & A00830383 \\
+                    \hline
+                    Erika Martínez Meneses & A01028621 \\
+                    \hline
+                    Emily Rebeca Méndez Cruz & A00830768 \\
+                    \hline
+                    Ana Paula Ruiz Alvaro & A01367467 \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            \vspace{0.7cm}
+            \large Dr. Alberto Francisco Martínez Herrera \\ % Nombre del profesor 1
+            \vspace{0.2cm}
+            \large Dr.-Ing. Jonathan Montalvo-Urquizo \\ % Nombre del profesor 2
+            \vspace{0.2cm}
+            \large Socio Formador: Kaspersky \\
+            \vspace{0.2cm}
+            \large Monterrey, Nuevo León \\
+            \vspace{0.2cm}
+            \large 30 de mayo del 2022 \\
+            \vspace{1cm}
+            \footnotesize El trabajo realizado es para fines académicos sin fines de lucro. Queda prohibida la reproducción total o parcial de los datos (en bruto o enmascarados), resultados, modelos y conclusiones sin el previo consentimiento por escrito otorgado por la PyME. \\
+        \end{center}
+    \end{titlepage}
+    
+    \tableofcontents
+    \clearpage
+
+    \section{Introducción}
+
+    \section{Inventario}
+
+        \subsection{Equipos y software}
+
+        \subsection{Personal de la PyME}
+
+            % Listar todas las personas que tienen acceso a los equipos mencionados en la tabla en conjunto con una descripción del software que utilizan acorde a sus responsabilidades designadas
+
+        \subsection{Topología de la red}
+
+            En la figura \ref{fig:pink-network-topology} se puede apreciar la topología de la red de la PyME. Siempre se encuentran conectados 6 dispositivos a la red. El equipo \emph{Tienda La Central} está a cargo del propietario \emph{Propietario 1}, los smartphones \emph{Smartphone Propietario 1 Central} y \emph{Smartphone Propietario 2 Central} están a cargo de los 2 respectivos propietarios de la empresa consiguiente. Respecto a la PyME a analizar, el equipo \emph{PINK} es usado en conjunto por el \emph{Propietario 2} y el \emph{Empleado N}.
+
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[scale=0.6]{img/sme-network-topology.png}\\ % Logo de la institución
+                \caption{Topología original de la red inventariada para la PyME PINK Accesorios y Regalos}
+                \label{fig:pink-network-topology}
+            \end{figure}
+
+    \appendix
+    % Need to deactivate and activate _ sign, regularly used in software names and versions
+    \catcode`\_=12% deactivate $ sign
+    % May not need to use landscape after all, gather all the text that will be typed in the report before changing this section
+    \section{Inventario de Software}
+        % Installed software on both connected machines
+        \begin{landscape}
+            \begin{table}[h!]
+                \centering
+                \scalebox{0.47}{
+                    \csvreader[tabular = ||c|c|c|c|c||,
+                                table head = \hline DisplayName & DisplayVersion & Publisher & InstallDate & id \\ \hline,
+                                late after last line = \\ \hline,
+                                ]{../inventory/data/processed/inventario-pink-software.csv}{}%
+                                {\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv}}
+                \caption{Software inventariado de la PyME}
+                \label{table:software-pyme}
+            \end{table}
+        \end{landscape}
+
+    % Information on the machines and OS
+    \section{Inventario de equipos}
+        % Information on the machines connected to the same network
+
+
+    \catcode`\_=3% reactivate $ sign
+
+
+\end{document}
