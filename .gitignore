@@ -29,7 +29,6 @@
 
 # Notebooks
 *.html
-*.ipynb
 
 # IDE
 *.vscode
@@ -40,3 +39,6 @@
 
 # Building docs
 build.sh
+
+# Binary
+*.bin
