@@ -1,0 +1,111 @@
+\documentclass{article}
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[]{amsthm}
+\usepackage{amsmath}
+\usepackage[]{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[letterpaper, margin=1.5in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{csvsimple}
+\usepackage{pdflscape}
+\decimalpoint
+\usepackage{float}
+\usepackage{pdflscape}
+
+
+\begin{document}
+    \begin{titlepage}
+        \begin{center}
+            % School logo
+            \begin{figure}
+                \centering
+                \includegraphics[scale=0.13]{../../img/logo_itesm.png}\\ % Logo de la institución
+            \end{figure}
+            \vspace{5cm}
+            % School data
+            \LARGE{Instituto Tecnológico y de Estudios Superiores de Monterrey}\\
+            \vspace{1cm}
+            \large Escuela de Ingeniería y Ciencias \\
+            \vspace{0.2cm}
+            \large Ingeniería en Ciencias de Datos y Matemáticas \\
+            \vspace{0.2cm}
+            \large Análisis de Criptografía y Seguridad\\
+            \vspace{1cm}
+            \textbf{Actividad 3.4. Configuración de VPNs basadas en IPSec}\\ % Nombre de la tarea
+            \vspace{0.7cm}
+            % Tabla de integrantes del equipo
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{ ||c|c|| }
+                    \hline
+                    Nombre & Matrícula \\
+                    \hline
+                    Julio Avelino Amador Fernández & A01276513 \\
+                    \hline
+                    Juan Pablo Echeagaray González & A00830646 \\
+                    \hline
+                    Verónica Victoria García De la Fuente & A00830383 \\
+                    \hline
+                    Erika Martínez Meneses & A01028621 \\
+                    \hline
+                    Emily Rebeca Méndez Cruz & A00830768 \\
+                    \hline
+                    Ana Paula Ruiz Alvaro & A01367467 \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            \vspace{0.7cm}
+            \large Dr. Alberto Francisco Martínez Herrera \\ % Nombre del profesor 1
+            \vspace{0.2cm}
+            \large Dr.-Ing. Jonathan Montalvo-Urquizo \\ % Nombre del profesor 2
+            \vspace{0.2cm}
+            \large Socio Formador: Kaspersky \\
+            \vspace{0.2cm}
+            \large Monterrey, Nuevo León \\
+            \vspace{0.2cm}
+            \large 10 de junio del 2022 \\
+            \vspace{1cm}
+        \end{center}
+    \end{titlepage}
+    
+    Las respuestas presentadas en este escrito se basan en la presentación, videos y artículo científico \emph{DNS-ADVP: A machine learning anomaly detection and visual platform to protect top-level domain name servers against DDoS attacks} escrito por profesores del ITESM y NIC \cite{trejo2019dns}.
+
+    \section{¿Cuál es la principal función de la plataforma: DNS-ADVP: DNS Anomaly Detection Visual Platform?}
+
+        Brindar una medida de contraatacar ciberataques del tipo DDoS que afecten a servidores DNS mediante un modelo visual.
+    
+    \section{¿Cuáles son las fuentes que generan una alerta en el sistema?}
+
+        \begin{itemize}
+            \item La actividad de las IP
+            \item Las correlaciones de las actividades de los IP
+            \item La predicción arrojada por el clasificador
+        \end{itemize}
+
+    \section{¿Cuál es el clasificador utilizado en la plataforma?}
+        El equipo implementó el algoritmo del vecino más cercano (KNN) para clasificar el tráfico en la red como normal o anormal.
+    
+    \section{¿De qué manera podrías mejorar la plataforma?}
+    
+    
+        \subsection{Simplificación o mejora de las visualizaciones}
+            
+            En el video se menciona que las 4 gráficas describen un mismo fenómeno, pero que cada par representa una cara del ataque DDoS; el que haya demasiadas visualizaciones para representar la misma información puede llegar a ser algo redundante y confuso; en especial creo que el gráfico de cuerdas necesita de una explicación a mayor detalle para ser interpretada.
+
+        \subsection{Realizar PCA en los datos que recibe el modelo}
+        
+            En el video se explica cómo el algoritmo KNN necesita de 174 atributos para realizar el proceso de clasificación con una métrica AUC de 80\%, que en palabras generales nos dice que el modelo tiene un desempeño aceptable para realizar. 
+
+            Sin embargo, varios de los atributos en el modelo fueron compuestos de atributos que ya se estaban contando, agregando una capa de dependencia que podría mermar la precisión del modelo. De forma tentativa, creo que un PCA podría arrojar luz sobre qué atributos son verdaderamente significativos para el proceso de clasificación.
+        
+        \subsection{Auditoría al código implementado}
+            
+            En la presentación nunca se brinda una liga de acceso al código implementado por el equipo, no existe una manera robusta de brindar críticas constructivas si es que no sabemos cómo es que llevaron a cabo su tarea, un poco de cultura open source nunca es mala cuando se trata de ciberseguridad.
+
+    \bibliographystyle{apalike}
+    \bibliography{references.bib}
+
+\end{document}
